@@ -14,6 +14,8 @@ const STEP_COUNT    = 5; // steps 0–4
 const STEP_PROGRESS = [0, 25, 50, 75, 100];
 
 let transitioning = false;
+let leaveTimer    = null;
+let enterTimer    = null;
 
 // ── Wizard state ─────────────────────────────────────────────────────────────
 let currentStep = 0;
@@ -85,22 +87,30 @@ function goTo(index) {
 }
 
 function renderStep(prevIndex, direction) {
-  const prevEl = document.getElementById(`step-${prevIndex}`);
-  const nextEl = document.getElementById(`step-${currentStep}`);
+  // Cancel in-flight timers and immediately settle any stuck leaving step
+  clearTimeout(leaveTimer);
+  clearTimeout(enterTimer);
+  document.querySelectorAll('.step.leaving').forEach(el => {
+    el.classList.remove('active', 'leaving');
+    el.style.animationName = '';
+  });
+
+  const prevEl    = document.getElementById(`step-${prevIndex}`);
+  const nextEl    = document.getElementById(`step-${currentStep}`);
   const goingBack = direction === 'back';
+  const LEAVE_MS  = 220;
 
   if (prevEl && prevEl !== nextEl) {
     prevEl.classList.add('leaving');
     if (goingBack) prevEl.style.animationName = 'stepOutBack';
-    prevEl.addEventListener('animationend', () => {
+    leaveTimer = setTimeout(() => {
       prevEl.classList.remove('active', 'leaving');
       prevEl.style.animationName = '';
-    }, { once: true });
+    }, LEAVE_MS);
   }
 
-  const LEAVE_MS = 220;
   transitioning = true;
-  setTimeout(() => {
+  enterTimer = setTimeout(() => {
     nextEl.style.animationName = goingBack ? 'stepBack' : '';
     nextEl.classList.add('active');
     progressFill.style.width = `${STEP_PROGRESS[currentStep]}%`;
