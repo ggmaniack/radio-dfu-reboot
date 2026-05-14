@@ -1,0 +1,51 @@
+<svg width="100%" viewBox="0 0 680 700" role="img" xmlns="http://www.w3.org/2000/svg">
+  <title>USB-C cable end, top-down view</title>
+  <desc>USB-C plug lying on a desk viewed from above. Silver plug at bottom, black overmold above, long cable extending upward and fading out.</desc>
+
+  <defs>
+    <linearGradient id="shellg" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#444"/>
+      <stop offset="15%" stop-color="#7a7a7a"/>
+      <stop offset="50%" stop-color="#a8a8a8"/>
+      <stop offset="85%" stop-color="#7a7a7a"/>
+      <stop offset="100%" stop-color="#444"/>
+    </linearGradient>
+    <linearGradient id="overg" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#181818"/>
+      <stop offset="20%" stop-color="#2e2e2e"/>
+      <stop offset="50%" stop-color="#3a3a3a"/>
+      <stop offset="80%" stop-color="#2e2e2e"/>
+      <stop offset="100%" stop-color="#181818"/>
+    </linearGradient>
+    <linearGradient id="cableg" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#101010"/>
+      <stop offset="35%" stop-color="#2a2a2a"/>
+      <stop offset="50%" stop-color="#333"/>
+      <stop offset="65%" stop-color="#2a2a2a"/>
+      <stop offset="100%" stop-color="#101010"/>
+    </linearGradient>
+
+    <!-- Fade spans only y=0..80: transparent at top edge, opaque by 80px in -->
+    <linearGradient id="cableFade" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="80">
+      <stop offset="0%"   stop-color="white" stop-opacity="0"/>
+      <stop offset="100%" stop-color="white" stop-opacity="1"/>
+    </linearGradient>
+    <mask id="cableMask" maskUnits="userSpaceOnUse">
+      <rect x="310" y="-80" width="60" height="400" fill="url(#cableFade)"/>
+    </mask>
+  </defs>
+
+  <!-- Cable drawn first (behind everything), fades out at top -->
+  <rect x="322" y="-80" width="36" height="370" rx="18"
+        fill="url(#cableg)" stroke="#0a0a0a" stroke-width="1"
+        mask="url(#cableMask)"/>
+
+  <!-- Silver shell at bottom (plug tip) -->
+  <rect x="303" y="330" width="74" height="98" rx="5"
+        fill="url(#shellg)" stroke="#444" stroke-width="1.5"/>
+
+  <!-- Black overmold on top of shell -->
+  <rect x="296" y="215" width="88" height="155" rx="14"
+        fill="url(#overg)" stroke="#111" stroke-width="1.2"/>
+
+</svg>

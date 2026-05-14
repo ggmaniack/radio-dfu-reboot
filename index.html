@@ -6,10 +6,20 @@
   <title>USB Radio Power — EdgeTX / OpenTX DFU Tool</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+  <header class="site-header">
+    <span class="site-name">radio<strong>usb</strong></span>
+    <span class="site-tagline">No-battery radio starter</span>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode">
+      <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+    </button>
+  </header>
 
   <div class="progress-bar" id="progressBar">
     <div class="progress-fill" id="progressFill"></div>
@@ -26,8 +36,9 @@
         <h1 class="step-heading">Power your radio<br>from USB</h1>
 
         <p class="step-intro">
-          A browser-based tool for EdgeTX and OpenTX transmitters. No app installation needed —
-          your browser talks directly to the radio's bootloader via WebUSB.
+          Boot your EdgeTX or OpenTX radio from USB — no battery required.
+          Plugging in while powered off puts the radio into DFU mode; this tool kicks it out
+          at the right moment so it starts normally and stays powered from USB.
         </p>
 
         <div class="cards" id="warningCards">
@@ -47,8 +58,8 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
             </div>
             <div class="card__body">
-              <strong>Disable internal TX module first</strong>
-              <span>High-power ELRS modules (e.g. Boxer ELRS) draw too much current. Turn yours off in EdgeTX model settings before connecting.</span>
+              <strong>Remove any external TX modules</strong>
+              <span>High-power modules (e.g. ELRS) draw too much current for USB to supply. Remove them before connecting.</span>
             </div>
           </div>
 
@@ -59,16 +70,6 @@
             <div class="card__body">
               <strong>Chrome or Edge required</strong>
               <span>WebUSB is not supported in Firefox or Safari. Use a Chromium-based browser.</span>
-            </div>
-          </div>
-
-          <div class="card card--windows" id="cardWindows">
-            <div class="card__icon">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
-            </div>
-            <div class="card__body">
-              <strong>Windows: USB driver swap needed</strong>
-              <span>We'll walk you through replacing the default STM32 DFU driver with WinUSB so the browser can access your radio.</span>
             </div>
           </div>
 
@@ -88,48 +89,18 @@
     <section class="step" id="step-1">
       <div class="step-bg-num" aria-hidden="true">01</div>
       <div class="step-inner">
-        <div class="step-tag">Step 1 of 4</div>
+        <div class="step-tag">Step 1 of 3</div>
         <h1 class="step-heading">Connect your radio</h1>
 
         <div class="illustration">
-          <svg class="radio-svg" viewBox="0 0 220 340" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Radio body -->
-            <rect x="20" y="50" width="180" height="280" rx="18" fill="var(--surface)" stroke="var(--border)" stroke-width="2.5"/>
-            <!-- Screen -->
-            <rect x="35" y="70" width="150" height="110" rx="8" fill="var(--text)"/>
-            <!-- Screen - off state -->
-            <text x="110" y="132" text-anchor="middle" fill="var(--text-secondary-dimmed)" font-family="DM Sans, sans-serif" font-size="11" opacity="0.4">blank screen</text>
-            <!-- Grip area -->
-            <rect x="35" y="250" width="150" height="65" rx="6" fill="var(--accent-light)"/>
-            <!-- Buttons row -->
-            <circle cx="75" cy="215" r="11" fill="var(--bg)" stroke="var(--border)" stroke-width="2"/>
-            <circle cx="110" cy="215" r="11" fill="var(--bg)" stroke="var(--border)" stroke-width="2"/>
-            <circle cx="145" cy="215" r="11" fill="var(--bg)" stroke="var(--border)" stroke-width="2"/>
-            <!-- USB port at top of radio -->
-            <rect x="96" y="44" width="28" height="14" rx="3.5" fill="var(--bg)" stroke="var(--border)" stroke-width="2"/>
-            <!-- USB port interior -->
-            <rect x="100" y="47" width="20" height="8" rx="1.5" fill="var(--border)"/>
-
-            <!-- USB cable group — animates in -->
-            <g class="usb-cable-anim">
-              <!-- Cable wire -->
-              <line x1="110" y1="44" x2="110" y2="-10" stroke="var(--accent)" stroke-width="4" stroke-linecap="round"/>
-              <!-- Connector body -->
-              <rect x="96" y="-30" width="28" height="22" rx="4" fill="var(--accent)"/>
-              <!-- Connector detail -->
-              <rect x="101" y="-25" width="18" height="12" rx="2" fill="var(--accent-dark)" opacity="0.3"/>
-              <!-- USB cable above connector -->
-              <line x1="110" y1="-30" x2="110" y2="-55" stroke="var(--accent)" stroke-width="4" stroke-linecap="round"/>
-              <!-- PC end label -->
-              <text x="110" y="-62" text-anchor="middle" fill="var(--accent)" font-family="DM Sans, sans-serif" font-size="10" font-weight="500">to PC</text>
-            </g>
-
-            <!-- Arrow indicator -->
-            <g class="port-arrow">
-              <path d="M138 30 Q160 20 160 36" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-dasharray="3 2"/>
-              <text x="163" y="40" fill="var(--accent)" font-family="DM Sans, sans-serif" font-size="10" font-weight="500">data port</text>
-            </g>
-          </svg>
+          <div class="illus-scene">
+            <p class="illus-to-pc">to PC ↕</p>
+            <div class="illus-cable-wrap">
+              <img class="illus-cable" src="assets/cable.svg" alt="">
+            </div>
+            <img class="illus-radio" src="assets/radio.svg" alt="RC radio transmitter">
+            <span class="illus-port-label">↓ data port</span>
+          </div>
         </div>
 
         <ol class="instr-list">
@@ -160,67 +131,11 @@
       </div>
     </section>
 
-    <!-- ── Step 2: Driver ───────────────────────────────────────────────── -->
+    <!-- ── Step 2: Pair ─────────────────────────────────────────────────── -->
     <section class="step" id="step-2">
       <div class="step-bg-num" aria-hidden="true">02</div>
       <div class="step-inner">
-
-        <!-- Windows variant -->
-        <div id="driverWin">
-          <div class="step-tag">Step 2 of 4 — Windows</div>
-          <h1 class="step-heading">Fix the USB driver</h1>
-          <p class="step-intro">
-            Windows auto-installs its own STM32 DFU driver, which the browser can't use.
-            Swap it to <strong>WinUSB</strong> using one of these tools:
-          </p>
-
-          <div class="driver-options">
-            <div class="driver-option driver-option--primary">
-              <div class="driver-option__badge">Easiest</div>
-              <h3>ImpulseRC Driver Fixer</h3>
-              <p>Run it once — it automatically finds the STM32 BOOTLOADER device and replaces the driver.</p>
-              <a class="btn btn--primary" href="https://impulserc.blob.core.windows.net/utilities/ImpulseRC_Driver_Fixer.exe" target="_blank" rel="noopener">
-                Download Driver Fixer
-              </a>
-            </div>
-            <div class="driver-option">
-              <h3>Zadig (manual)</h3>
-              <p>
-                Open Zadig → select <strong>STM32 BOOTLOADER</strong> from the device list
-                → choose <strong>WinUSB</strong> → click <em>Install Driver</em>.
-              </p>
-              <a class="btn btn--ghost" href="https://zadig.akeo.ie" target="_blank" rel="noopener">Open Zadig →</a>
-            </div>
-          </div>
-
-          <p class="hint">If you have a Thrustmaster wheel, its drivers may conflict. Try a different USB port or machine.</p>
-        </div>
-
-        <!-- Mac / Linux variant -->
-        <div id="driverMac" style="display:none">
-          <div class="step-tag">Step 2 of 4</div>
-          <h1 class="step-heading">No driver needed</h1>
-          <p class="step-intro">
-            macOS and Linux don't need any driver changes. Your browser can access the radio directly.
-          </p>
-          <div class="ok-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            You're all set — continue to the next step.
-          </div>
-        </div>
-
-        <div class="step-actions step-actions--row">
-          <button class="btn btn--ghost" data-action="prev">← Back</button>
-          <button class="btn btn--primary" data-action="next">Driver is ready →</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── Step 3: Pair ─────────────────────────────────────────────────── -->
-    <section class="step" id="step-3">
-      <div class="step-bg-num" aria-hidden="true">03</div>
-      <div class="step-inner">
-        <div class="step-tag">Step 3 of 4</div>
+        <div class="step-tag">Step 2 of 3</div>
         <h1 class="step-heading">Pair with browser</h1>
         <p class="step-intro">
           Click below to open the browser's device picker. Select <strong>STM32 BOOTLOADER</strong> when it appears.
@@ -231,7 +146,6 @@
             <div class="pair-usb-icon">
               <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="32" cy="32" r="30" stroke="var(--border)" stroke-width="2"/>
-                <!-- USB symbol -->
                 <line x1="32" y1="18" x2="32" y2="46" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>
                 <line x1="32" y1="18" x2="42" y2="26" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>
                 <line x1="32" y1="18" x2="22" y2="26" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>
@@ -251,10 +165,10 @@
               <span id="deviceNameLabel"></span>
             </div>
           </div>
+        </div>
 
-          <div class="pair-error" id="pairError" style="display:none">
-            <p id="pairErrorMsg"></p>
-          </div>
+        <div class="pair-hint" id="pairHint" style="display:none">
+          <p id="pairHintMsg"></p>
         </div>
 
         <div class="step-actions step-actions--row">
@@ -262,18 +176,72 @@
           <button class="btn btn--primary" id="pairBtn">Open device picker</button>
           <button class="btn btn--primary" id="pairNextBtn" style="display:none" data-action="next">Continue →</button>
         </div>
+
+        <!-- Driver help — side path, off the main flow -->
+        <div class="cant-see-row">
+          <button class="cant-see-btn" id="cantSeeBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            I can't see my radio in the list
+          </button>
+        </div>
+
+        <div class="driver-help" id="driverHelp">
+          <div class="driver-help__inner">
+
+            <!-- Windows -->
+            <div id="driverHelpWin">
+              <p class="driver-help__lead">
+                On Windows, the browser can only access USB devices using the <strong>WinUSB</strong> driver.
+                The default STM32 DFU driver blocks it. Replace it using one of these:
+              </p>
+              <div class="driver-options">
+                <div class="driver-option driver-option--primary">
+                  <div class="driver-option__badge">Easiest</div>
+                  <h3>ImpulseRC Driver Fixer</h3>
+                  <p>Run it once — it finds the STM32 BOOTLOADER device and replaces the driver automatically.</p>
+                  <a class="btn btn--primary" href="https://impulserc.blob.core.windows.net/utilities/ImpulseRC_Driver_Fixer.exe" target="_blank" rel="noopener">
+                    Download Driver Fixer
+                  </a>
+                </div>
+                <div class="driver-option">
+                  <h3>Zadig (manual)</h3>
+                  <p>Open Zadig → select <strong>STM32 BOOTLOADER</strong> from the device list → choose <strong>WinUSB</strong> → click <em>Install Driver</em>.</p>
+                  <a class="btn btn--ghost" href="https://zadig.akeo.ie" target="_blank" rel="noopener">Open Zadig →</a>
+                </div>
+              </div>
+              <p class="hint">If you use a Thrustmaster steering wheel, their drivers have been known to interfere with this process. Uninstall them or switch to another PC.</p>
+            </div>
+
+            <!-- Mac / Linux -->
+            <div id="driverHelpMac" style="display:none">
+              <p class="driver-help__lead">On macOS and Linux no driver changes are needed. A few things to check:</p>
+              <ul class="instr-list">
+                <li>
+                  <span class="instr-num">·</span>
+                  <span>Is the radio screen completely blank? If it shows the home screen, it's not in DFU mode — unplug and try again with the radio off.</span>
+                </li>
+                <li>
+                  <span class="instr-num">·</span>
+                  <span>Try a different USB cable or port.</span>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
       </div>
     </section>
 
-    <!-- ── Step 4: Exit DFU ─────────────────────────────────────────────── -->
-    <section class="step" id="step-4">
-      <div class="step-bg-num" aria-hidden="true">04</div>
+    <!-- ── Step 3: Exit DFU ─────────────────────────────────────────────── -->
+    <section class="step" id="step-3">
+      <div class="step-bg-num" aria-hidden="true">03</div>
       <div class="step-inner">
-        <div class="step-tag">Step 4 of 4 — the timing trick</div>
+        <div class="step-tag">Step 3 of 3 — the timing trick</div>
         <h1 class="step-heading">Exit DFU mode</h1>
 
         <div class="trick-container">
-          <div class="trick-step trick-step--prep" id="trickPrep">
+          <div class="trick-step trick-step--prep">
             <div class="trick-step__num">1</div>
             <div class="trick-step__body">
               <strong>Place your thumb on the power button</strong>
@@ -287,7 +255,7 @@
             <div class="trick-connector__line"></div>
           </div>
 
-          <div class="trick-step trick-step--action" id="trickAction">
+          <div class="trick-step trick-step--action">
             <div class="trick-step__num">2</div>
             <div class="trick-step__body">
               <strong>Hold the power button down and click below at the same time</strong>
@@ -309,8 +277,8 @@
       </div>
     </section>
 
-    <!-- ── Step 5: Success ──────────────────────────────────────────────── -->
-    <section class="step" id="step-5">
+    <!-- ── Step 4: Success ──────────────────────────────────────────────── -->
+    <section class="step" id="step-4">
       <div class="step-bg-num" aria-hidden="true">✓</div>
       <div class="step-inner">
         <div class="step-tag">Done!</div>
@@ -325,7 +293,7 @@
         <div class="tips">
           <h3>Keep in mind</h3>
           <ul>
-            <li><strong>Disable the internal TX module</strong> in your radio's model settings — it cuts power draw significantly and prevents brown-outs</li>
+            <li><strong>Disable the internal TX module</strong> in EdgeTX model settings — it cuts power draw significantly and helps prevent brown-outs</li>
             <li>Use a <strong>powered USB hub</strong> or a port directly on your computer for better current delivery</li>
             <li>The radio may reboot or shut off if the USB port can't supply enough current</li>
           </ul>
@@ -333,7 +301,7 @@
 
         <div class="step-actions step-actions--row">
           <button class="btn btn--ghost" id="restartBtn">Start over</button>
-          <a class="btn btn--primary" href="https://github.com" target="_blank" rel="noopener">View on GitHub</a>
+          <a class="btn btn--primary" href="https://github.com/ggmaniack/radio-dfu-reboot" target="_blank" rel="noopener">View on GitHub</a>
         </div>
       </div>
     </section>

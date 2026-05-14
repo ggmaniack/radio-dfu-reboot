@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-label="Generic RC radio transmitter icon">
+  <defs>
+    <linearGradient id="body" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#8f9393"/>
+      <stop offset="1" stop-color="#777b7b"/>
+    </linearGradient>
+    <linearGradient id="dark" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#55595a"/>
+      <stop offset="1" stop-color="#373b3c"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#d8e1dd"/>
+      <stop offset="1" stop-color="#b8c3c0"/>
+    </linearGradient>
+    <style>
+      .stroke { stroke:#3f4344; stroke-width:8; stroke-linejoin:round; stroke-linecap:round; }
+      .thin { stroke:#3f4344; stroke-width:5; stroke-linejoin:round; stroke-linecap:round; }
+      .soft { fill:#676c6d; opacity:.45; }
+      .button { fill:#666b6c; stroke:#3f4344; stroke-width:5; }
+    </style>
+  </defs>
+
+  <!-- body -->
+  <path class="stroke" fill="url(#body)" d="
+    M145 247
+    C170 207 219 174 278 166
+    L522 166
+    C581 174 630 207 655 247
+    C677 282 684 339 683 408
+    L681 563
+    C681 606 652 637 610 642
+    C546 649 497 628 456 628
+    L344 628
+    C303 628 254 649 190 642
+    C148 637 119 606 119 563
+    L117 408
+    C116 339 123 282 145 247 Z"/>
+
+  <!-- top raised pad -->
+  <path class="thin" fill="#6f7475" d="M259 170 C272 191 297 202 330 202 L470 202 C503 202 528 191 541 170 Z"/>
+
+  <!-- side grips -->
+  <path class="thin soft" d="M120 392 C144 405 149 445 146 491 C143 542 151 583 177 611 C137 604 119 584 119 563 Z"/>
+  <path class="thin soft" d="M680 392 C656 405 651 445 654 491 C657 542 649 583 623 611 C663 604 681 584 681 563 Z"/>
+
+  <!-- gimbal group left -->
+  <g transform="translate(250 342)">
+    <circle r="105" fill="#5e6364" class="thin"/>
+    <circle r="84" fill="url(#dark)" class="thin"/>
+    <rect x="-68" y="-45" width="136" height="90" rx="16" fill="#303434" class="thin"/>
+    <rect x="-47" y="-31" width="94" height="62" rx="10" fill="#55595a" class="thin"/>
+    <line x1="0" y1="-31" x2="0" y2="31" class="thin"/>
+    <circle r="26" fill="#989c9d" class="thin"/>
+    <circle r="10" fill="#d1d3d3" stroke="#868a8b" stroke-width="4"/>
+  </g>
+
+  <!-- gimbal group right -->
+  <g transform="translate(550 342)">
+    <circle r="105" fill="#5e6364" class="thin"/>
+    <circle r="84" fill="url(#dark)" class="thin"/>
+    <rect x="-68" y="-45" width="136" height="90" rx="16" fill="#303434" class="thin"/>
+    <rect x="-47" y="-31" width="94" height="62" rx="10" fill="#55595a" class="thin"/>
+    <line x1="0" y1="-31" x2="0" y2="31" class="thin"/>
+    <circle r="26" fill="#989c9d" class="thin"/>
+    <circle r="10" fill="#d1d3d3" stroke="#868a8b" stroke-width="4"/>
+  </g>
+
+  <!-- center controls -->
+  <rect x="362" y="239" width="76" height="34" rx="17" class="button"/>
+  <circle cx="400" cy="399" r="31" fill="#626768" class="thin"/>
+
+  <!-- screen -->
+  <rect x="283" y="480" width="234" height="141" rx="17" fill="#343838" class="stroke"/>
+  <rect x="315" y="505" width="170" height="92" rx="6" fill="url(#screen)"/>
+
+  <!-- small buttons -->
+  <g class="button">
+    <rect x="189" y="506" width="55" height="31" rx="14"/>
+    <rect x="189" y="554" width="55" height="31" rx="14"/>
+    <rect x="556" y="506" width="55" height="31" rx="14"/>
+    <rect x="556" y="554" width="55" height="31" rx="14"/>
+  </g>
+</svg>

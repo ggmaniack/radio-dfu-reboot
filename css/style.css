@@ -1,32 +1,87 @@
 /* ── Tokens ─────────────────────────────────────────────────────────────── */
 :root {
-  --bg:               oklch(97% 0.012 65);
-  --surface:          oklch(100% 0 0);
-  --border:           oklch(87% 0.018 65);
-  --text:             oklch(18% 0.022 65);
-  --text-secondary:   oklch(48% 0.02 65);
-  --text-secondary-dimmed: oklch(60% 0.015 65);
+  --bg:               oklch(97.5% 0.008 240);
+  --surface:          oklch(100% 0.003 240);
+  --border:           oklch(88% 0.012 240);
+  --text:             oklch(17% 0.025 240);
+  --text-secondary:   oklch(50% 0.018 240);
+  --text-secondary-dimmed: oklch(66% 0.012 240);
 
-  --accent:           oklch(62% 0.165 52);
-  --accent-dark:      oklch(48% 0.155 52);
-  --accent-light:     oklch(93% 0.04 65);
-  --accent-glow:      oklch(62% 0.165 52 / 0.15);
+  --accent:           oklch(52% 0.22 252);
+  --accent-dark:      oklch(42% 0.22 252);
+  --accent-light:     oklch(95% 0.014 240);
+  --accent-glow:      oklch(52% 0.22 252 / 0.15);
 
   --danger:           oklch(52% 0.19 25);
-  --danger-bg:        oklch(96% 0.02 25);
+  --danger-bg:        oklch(97% 0.015 25);
   --info:             oklch(52% 0.16 248);
-  --info-bg:          oklch(96% 0.02 248);
+  --info-bg:          oklch(97% 0.014 248);
   --scope:            oklch(52% 0.16 155);
-  --scope-bg:         oklch(96% 0.02 155);
+  --scope-bg:         oklch(97% 0.014 155);
   --win:              oklch(52% 0.14 250);
-  --win-bg:           oklch(96% 0.02 250);
+  --win-bg:           oklch(97% 0.014 250);
 
   --success:          oklch(55% 0.16 150);
-  --success-bg:       oklch(95% 0.03 150);
+  --success-bg:       oklch(96% 0.02 150);
 
   --radius:           14px;
   --radius-sm:        8px;
   --ease-out:         cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Dark mode ──────────────────────────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root:not(.theme-light) {
+    --bg:               oklch(13% 0.022 245);
+    --surface:          oklch(18% 0.022 245);
+    --border:           oklch(28% 0.022 245);
+    --text:             oklch(93% 0.008 240);
+    --text-secondary:   oklch(63% 0.014 240);
+    --text-secondary-dimmed: oklch(47% 0.01 240);
+
+    --accent:           oklch(68% 0.18 245);
+    --accent-dark:      oklch(58% 0.2 245);
+    --accent-light:     oklch(22% 0.04 245);
+    --accent-glow:      oklch(68% 0.18 245 / 0.22);
+
+    --danger:           oklch(68% 0.16 25);
+    --danger-bg:        oklch(20% 0.05 25);
+    --info:             oklch(68% 0.14 248);
+    --info-bg:          oklch(20% 0.05 248);
+    --scope:            oklch(68% 0.14 155);
+    --scope-bg:         oklch(20% 0.05 155);
+    --win:              oklch(68% 0.13 250);
+    --win-bg:           oklch(20% 0.05 250);
+
+    --success:          oklch(68% 0.15 150);
+    --success-bg:       oklch(20% 0.05 150);
+  }
+}
+
+:root.theme-dark {
+  --bg:               oklch(13% 0.022 245);
+  --surface:          oklch(18% 0.022 245);
+  --border:           oklch(28% 0.022 245);
+  --text:             oklch(93% 0.008 240);
+  --text-secondary:   oklch(63% 0.014 240);
+  --text-secondary-dimmed: oklch(47% 0.01 240);
+
+  --accent:           oklch(68% 0.18 245);
+  --accent-dark:      oklch(58% 0.2 245);
+  --accent-light:     oklch(22% 0.04 245);
+  --accent-glow:      oklch(68% 0.18 245 / 0.22);
+
+  --danger:           oklch(68% 0.16 25);
+  --danger-bg:        oklch(20% 0.05 25);
+  --info:             oklch(68% 0.14 248);
+  --info-bg:          oklch(20% 0.05 248);
+  --scope:            oklch(68% 0.14 155);
+  --scope-bg:         oklch(20% 0.05 155);
+  --win:              oklch(68% 0.13 250);
+  --win-bg:           oklch(20% 0.05 250);
+
+  --success:          oklch(68% 0.15 150);
+  --success-bg:       oklch(20% 0.05 150);
 }
 
 /* ── Reset ──────────────────────────────────────────────────────────────── */
@@ -40,6 +95,62 @@ body {
   color: var(--text);
   min-height: 100dvh;
   overflow-x: hidden;
+}
+
+/* ── Site header ────────────────────────────────────────────────────────── */
+.site-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1rem clamp(1.25rem, 6vw, 2.5rem) 0.75rem;
+  max-width: 740px;
+  margin: 0 auto;
+}
+
+.site-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.site-name strong {
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.site-tagline {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.02em;
+}
+
+.theme-btn {
+  margin-left: auto;
+  background: none;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+
+.theme-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-light);
+}
+
+.theme-btn svg {
+  width: 16px;
+  height: 16px;
 }
 
 /* ── Progress bar ───────────────────────────────────────────────────────── */
@@ -65,6 +176,7 @@ body {
   position: relative;
   min-height: 100dvh;
   display: grid;
+  overflow: hidden;
 }
 
 /* ── Steps ──────────────────────────────────────────────────────────────── */
@@ -75,7 +187,7 @@ body {
   max-width: 740px;
   margin: 0 auto;
   width: 100%;
-  overflow: hidden;
+  overflow: visible;
   display: none;
 }
 
@@ -113,7 +225,7 @@ body {
   position: absolute;
   top: 1rem;
   right: -0.5rem;
-  font-family: 'Syne', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-weight: 800;
   font-size: clamp(7rem, 22vw, 12rem);
   line-height: 1;
@@ -142,7 +254,7 @@ body {
 }
 
 .step-heading {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-weight: 800;
   font-size: clamp(2rem, 6vw, 3rem);
   line-height: 1.1;
@@ -232,20 +344,70 @@ body {
   margin: 1.5rem 0 2rem;
 }
 
-.radio-svg {
-  width: 180px;
-  height: auto;
-  overflow: visible;
+.illus-scene {
+  position: relative;
+  width: 260px;
+  padding-top: 20px;
+  flex-shrink: 0;
 }
 
-.usb-cable-anim {
-  animation: cableFloat 3s ease-in-out infinite;
-  transform-origin: 110px 44px;
+.illus-radio {
+  width: 100%;
+  height: auto;
+  display: block;
+  position: relative;
+  z-index: 2;
+}
+
+/* Cable floats behind the radio's top edge */
+.illus-cable-wrap {
+  position: absolute;
+  top: 35px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  animation: cableFloat 2.8s ease-in-out infinite;
+  z-index: 1;
+}
+
+.illus-cable {
+  width: 70px;
+  height: auto;
+  display: block;
+}
+
+/* "to PC" label above the cable */
+.illus-to-pc {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  margin: 0;
+  z-index: 3;
+}
+
+/* Port label — just above the radio body */
+.illus-port-label {
+  position: absolute;
+  top: 58px;
+  left: 143px;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--accent);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 3;
 }
 
 @keyframes cableFloat {
   0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-8px); }
+  50%       { transform: translateY(-10px); }
 }
 
 /* ── Instruction list ───────────────────────────────────────────────────── */
@@ -276,7 +438,7 @@ body {
   background: var(--accent-light);
   border: 1.5px solid color-mix(in oklch, var(--accent) 30%, transparent);
   color: var(--accent-dark);
-  font-family: 'Syne', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
   font-size: 0.8rem;
   display: flex;
@@ -340,7 +502,7 @@ body {
 }
 
 .driver-option h3 {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1rem;
   font-weight: 700;
   color: var(--text);
@@ -450,16 +612,77 @@ body {
   color: var(--text-secondary);
 }
 
-.pair-error {
-  padding: 1rem 1.25rem;
-  background: var(--danger-bg);
-  border: 1px solid color-mix(in oklch, var(--danger) 30%, transparent);
+.pair-hint {
+  padding: 0.75rem 1rem;
+  background: var(--accent-light);
+  border: 1px solid color-mix(in oklch, var(--accent) 25%, transparent);
   border-radius: var(--radius-sm);
-  font-size: 0.88rem;
-  color: var(--danger);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
   line-height: 1.5;
-  max-width: 44ch;
-  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+/* ── "Can't see" button ─────────────────────────────────────────────────── */
+.cant-see-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.25rem;
+}
+
+.cant-see-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+}
+
+.cant-see-btn:hover {
+  color: var(--text);
+  background: var(--accent-light);
+}
+
+.cant-see-btn svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+/* ── Driver help panel ──────────────────────────────────────────────────── */
+.driver-help {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s var(--ease-out);
+  margin-top: 0.5rem;
+}
+
+.driver-help.open {
+  grid-template-rows: 1fr;
+}
+
+.driver-help__inner {
+  overflow: hidden;
+  padding: 0 0.25rem;
+}
+
+.driver-help.open .driver-help__inner {
+  padding-bottom: 1rem;
+}
+
+.driver-help__lead {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 1rem 0 1.25rem;
 }
 
 /* ── Trick steps (step 4) ───────────────────────────────────────────────── */
@@ -487,7 +710,7 @@ body {
   border-radius: 50%;
   background: var(--text);
   color: var(--surface);
-  font-family: 'Syne', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-weight: 800;
   font-size: 1rem;
   display: flex;
@@ -546,7 +769,7 @@ body {
   color: white;
   border: none;
   cursor: pointer;
-  font-family: 'Syne', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: clamp(1rem, 3vw, 1.2rem);
   font-weight: 700;
   letter-spacing: -0.01em;
@@ -638,7 +861,7 @@ body {
 }
 
 .tips h3 {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.9rem;
   font-weight: 700;
   color: var(--text);
